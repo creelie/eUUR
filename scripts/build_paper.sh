@@ -24,16 +24,16 @@ MASTER=Master${NAME}_masterzipfinal2.zip
 
 latex() { pdflatex -interaction=nonstopmode -halt-on-error "$@" > /dev/null; }
 build() { # build <jobname> <input>, run inside paper/
-  rm -f "$1.aux" "$1.out" "$1.log"
+  rm -f "$1.aux" "$1.out" "$1.log" "$1.toc"
   for run in 1 2 3 4; do
     latex -jobname="$1" "$2"
-    grep -q "Rerun to get" "$1.log" || break
+    [ "$run" -ge 2 ] && ! grep -q "Rerun to get" "$1.log" && break
   done
   if grep -E "Overfull|Underfull|undefined|Rerun to get" "$1.log"; then
     echo "build_paper.sh: fix the warnings above" >&2
     exit 1
   fi
-  rm -f "$1.aux" "$1.log" "$1.out"
+  rm -f "$1.aux" "$1.log" "$1.out" "$1.toc"
 }
 
 echo "== paper"
