@@ -24,6 +24,6 @@ Source files or ZIP: UnionClosedLimit_final2-tex.zip (the folder UnionClosedLimi
 AI provenance files: AI_PROVENANCE_UnionClosedLimit.md
 License: CC BY 4.0
 
-Data availability (in the paper): the programs, the LaTeX source and the figure programs are in https://github.com/creelie/eUUR and its Zenodo archive (release v1.1.0; all versions doi:10.5281/zenodo.23480218).
+Data availability (in the paper): the programs, the LaTeX source and the figure programs are in https://github.com/creelie/eUUR and its Zenodo archive (release v1.1.0, doi:10.5281/zenodo.23484214; all versions doi:10.5281/zenodo.23480218).
 AI disclosure (in the paper, Data and code availability): Deep Bhattacharjee carried out the computations and the Python, C, C++, Julia, Lean and shell verifications with AI assistance (Claude, Anthropic). No separate AI declaration.
 Funding: none. Competing interests: none.

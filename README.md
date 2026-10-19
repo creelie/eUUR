@@ -18,7 +18,7 @@ Theorem C reduces a smallest counterexample with 51 members on 13 elements to tw
 
 Frankl's conjecture itself (the constant 1/2) remains open.
 
-Archive: release v1.0.0, [doi:10.5281/zenodo.23480219](https://doi.org/10.5281/zenodo.23480219) (Theorems A, B); release v1.1.0 adds Theorem C; all versions [doi:10.5281/zenodo.23480218](https://doi.org/10.5281/zenodo.23480218).
+Archive: release v1.1.0, [doi:10.5281/zenodo.23484214](https://doi.org/10.5281/zenodo.23484214) (Theorems A, B, C); release v1.0.0, [doi:10.5281/zenodo.23480219](https://doi.org/10.5281/zenodo.23480219) (Theorems A, B); all versions [doi:10.5281/zenodo.23480218](https://doi.org/10.5281/zenodo.23480218).
 
 ## Layout
 
