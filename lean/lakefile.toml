@@ -1,0 +1,11 @@
+name = "UnionClosed"
+defaultTargets = ["UnionClosed", "Axioms"]
+
+[[lean_lib]]
+name = "UnionClosed"
+roots = ["UnionClosed"]
+globs = ["UnionClosed", "UnionClosed.+"]
+leanOptions = { autoImplicit = false }
+
+[[lean_lib]]
+name = "Axioms"

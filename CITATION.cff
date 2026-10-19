@@ -1,0 +1,46 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Attaining the entropy limit for union-closed families"
+type: software
+authors:
+  - family-names: Bhattacharjee
+    given-names: Deep
+    orcid: "https://orcid.org/0000-0003-0466-750X"
+    affiliation: "Formerly, Electro-Gravitational Space Propulsion Laboratory (EGSPL), Bhubaneswar, Odisha 751030, India; Formerly, University of Calcutta, Senate House, 87/1 College Street, Kolkata 700073, West Bengal, India"
+    email: itsdeep@live.com
+  - family-names: Bhattacharya
+    given-names: Ushashi
+    orcid: "https://orcid.org/0009-0002-2254-3914"
+    affiliation: "Formerly, National Taiwan University, Taipei 106319, Taiwan"
+    email: rai.bhattacharya.in@gmail.com
+version: 1.0.0
+date-released: 2026-10-19
+license: MIT
+repository-code: "https://github.com/creelie/eUUR"
+keywords:
+  - union-closed sets conjecture
+  - Frankl's conjecture
+  - entropy method
+  - interval arithmetic
+abstract: >-
+  We prove that every finite union-closed family with a nonempty member has an
+  element lying in at least a fraction 0.38288525996... of its members. The
+  constant is the exact limit of the entropy method in the form of Liu and
+  Jiang. With Jiang's global coupling the bound is strict for every family.
+references:
+  - type: article
+    title: "Entropy bounds and global couplings for union-closed families"
+    authors:
+      - family-names: Jiang
+        given-names: Y.
+    year: 2026
+    url: "https://arxiv.org/abs/2609.08291"
+  - type: article
+    title: "Beyond Liu's 0.382709 threshold for the union-closed sets conjecture"
+    authors:
+      - family-names: Costa
+        given-names: S.
+      - family-names: Sadhu
+        given-names: A.
+    year: 2026
+    url: "https://arxiv.org/abs/2610.02295"
