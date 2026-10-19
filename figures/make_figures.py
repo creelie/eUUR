@@ -199,6 +199,55 @@ def fig_records():
     save(fig, "fig_records.png")
 
 
+def fig_blocks():
+    """The four blocks of the boundary case, and the size and solving time of the formulas."""
+    from mpl_toolkits.mplot3d import Axes3D, proj3d  # noqa: F401
+    from mpl_toolkits.mplot3d.art3d import Poly3DCollection
+    fig = plt.figure(figsize=(12.4, 5.6))
+    ax = fig.add_axes([0.0, 0.0, 0.52, 0.92], projection="3d")
+    G = 2.2
+    blocks = [((0, 0), r"$P_{00}$: $m$", r"$t,p\notin X$", 1.0, "#9ecae1"),
+              ((G, 0), r"$P_{10}$: $m$", r"$t\in X,\ p\notin X$", 1.0, "#fdae6b"),
+              ((0, G), r"$P_{01}$: $m$", r"$p\in X,\ t\notin X$", 1.0, "#a1d99b"),
+              ((G, G), r"$P_{11}$: $m-1$", r"$U$ and $A_i$, $i\in W$", 0.88, "#bcbddc")]
+
+    def box(x0, y0, hgt, col):
+        X = [x0, x0 + 1.0]; Y = [y0, y0 + 1.0]; Z = [0, hgt]
+        v = np.array([[X[i], Y[j], Z[k]] for i in (0, 1) for j in (0, 1) for k in (0, 1)])
+        faces = [[0, 1, 3, 2], [4, 5, 7, 6], [0, 1, 5, 4], [2, 3, 7, 6], [0, 2, 6, 4], [1, 3, 7, 5]]
+        ax.add_collection3d(Poly3DCollection([v[f] for f in faces], facecolor=col, edgecolor="k",
+                                             linewidths=0.6, alpha=0.9))
+    ax.set_xlim(-0.3, G + 1.3); ax.set_ylim(-0.3, G + 1.3); ax.set_zlim(0, 1.5)
+    ax.view_init(elev=30, azim=-60)
+    ax.set_axis_off()
+    for (x0, y0), lab, sub, hgt, col in blocks:
+        box(x0, y0, hgt, col)
+    fig.canvas.draw()
+    for (x0, y0), lab, sub, hgt, col in blocks:
+        px, py, _ = proj3d.proj_transform(x0 + 0.5, y0 + 0.5, hgt, ax.get_proj())
+        ax.annotate(lab + "\n" + sub, (px, py), xytext=(0, 14), textcoords="offset points",
+                    ha="center", va="bottom", fontsize=11, zorder=30,
+                    bbox=dict(boxstyle="round,pad=0.25", fc="white", ec="0.6", alpha=0.95))
+    fig.text(0.26, 0.93, r"members $X$ by membership of a top $t$ and its partner $p$;"
+             "\n" r"$X\cup Y\in P_{11}$ for every $X\in P_{10}$, $Y\in P_{01}$",
+             ha="center", va="center", fontsize=11.5)
+    # right panel: formula sizes and solving times
+    data = np.loadtxt(os.path.join(ROOT, "checks", "sat", "results.txt"))
+    m, var, cl, sec = data[:, 0], data[:, 1], data[:, 2], data[:, 3]
+    a2 = fig.add_axes([0.58, 0.14, 0.38, 0.76])
+    a2.semilogy(m, cl, "o-", color="#3182bd", label="clauses")
+    a2.semilogy(m, var, "s-", color="#31a354", label="variables")
+    a2.set_xlabel("$m$ (elements)"); a2.set_ylabel("size of the formula")
+    a3 = a2.twinx()
+    a3.semilogy(m, np.maximum(sec, 1e-2), "^--", color="#de2d26", label="CaDiCaL seconds")
+    a3.set_ylabel("seconds to refute")
+    h1, l1 = a2.get_legend_handles_labels(); h2, l2 = a3.get_legend_handles_labels()
+    a2.legend(h1 + h2, l1 + l2, loc="upper left", fontsize=10, frameon=False)
+    a2.set_xticks(m.astype(int))
+    a2.set_title("All unsatisfiable; proofs checked by drat-trim", fontsize=11)
+    save(fig, "fig_blocks.png")
+
+
 if __name__ == "__main__":
     print("q* =", QS, "C* =", CSTAR)
-    fig_gaps(); fig_tangency(); fig_scheme(); fig_records()
+    fig_gaps(); fig_tangency(); fig_scheme(); fig_records(); fig_blocks()

@@ -31,7 +31,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        check: [python, julia, c, cpp]
+        check: [python, julia, c, cpp, sat]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -44,6 +44,17 @@ jobs:
         if: matrix.check == 'julia'
         with:
           version: "1.10"
+      - name: Build CaDiCaL and drat-trim
+        if: matrix.check == 'sat'
+        run: |
+          git clone -q https://github.com/arminbiere/cadical.git "$RUNNER_TEMP/cadical"
+          git -C "$RUNNER_TEMP/cadical" checkout -q c60730422e758ef1cebe7aeddf2dda31c996bf04
+          ( cd "$RUNNER_TEMP/cadical" && ./configure > /dev/null && make -j4 > /dev/null )
+          git clone -q https://github.com/marijnheule/drat-trim.git "$RUNNER_TEMP/drat-trim"
+          git -C "$RUNNER_TEMP/drat-trim" checkout -q 2e3b2dc0ecf938addbd779d42877b6ed69d9a985
+          make -C "$RUNNER_TEMP/drat-trim" > /dev/null
+          echo "$RUNNER_TEMP/cadical/build" >> "$GITHUB_PATH"
+          echo "$RUNNER_TEMP/drat-trim" >> "$GITHUB_PATH"
       - run: SKIP_LEAN=1 CHECKS=${{ matrix.check }} bash scripts/run_all.sh
 
   paper:

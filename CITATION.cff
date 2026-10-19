@@ -13,8 +13,8 @@ authors:
     orcid: "https://orcid.org/0009-0002-2254-3914"
     affiliation: "Formerly, National Taiwan University, Taipei 106319, Taiwan"
     email: rai.bhattacharya.in@gmail.com
-version: 1.0.0
-doi: "10.5281/zenodo.23480219"
+version: 1.1.0
+doi: "10.5281/zenodo.23480218"
 date-released: 2026-10-19
 license: MIT
 repository-code: "https://github.com/creelie/eUUR"
@@ -23,11 +23,13 @@ keywords:
   - Frankl's conjecture
   - entropy method
   - interval arithmetic
+  - satisfiability
 abstract: >-
   We prove that every finite union-closed family with a nonempty member has an
   element lying in at least a fraction 0.38288525996... of its members. The
   constant is the exact limit of the entropy method in the form of Liu and
   Jiang. With Jiang's global coupling the bound is strict for every family.
+  We also prove the conjecture for every family of at most 52 members.
 references:
   - type: article
     title: "Entropy bounds and global couplings for union-closed families"

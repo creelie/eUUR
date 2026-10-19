@@ -4,15 +4,19 @@
 # Usage: scripts/run_all.sh             (all steps)
 #        scripts/run_all.sh --no-lean   (skip the Lean build)
 # Environment:
-#   CHECKS="python julia c cpp"   the checks to run (default: all four; "" runs none)
+#   CHECKS="python julia c cpp sat"   the checks to run (default: all five; "" runs none)
+#   SAT_MS="3 4 ... 11"               the values of m for the sat check (default 3 to 11;
+#                                     m = 12, 13 take minutes to hours, see checks/sat/run_sat.sh)
 #   SKIP_LEAN=1                   same as --no-lean
 # Requirements: elan (Lean 4) for the Lean build; python3 with python-flint, julia, a C
-# compiler and a C++20 compiler for the checks that are run.
+# compiler and a C++20 compiler, and cadical with drat-trim for the checks that are run.
 #
 # The python check is the proof: the interval certificate of the two inequalities away
 # from the point of contact (verify_exact.py, about ninety seconds) and the ball-arithmetic
 # Hessian certificate on the square S around it (tangency.py). The C, C++ and Julia
-# programs are independent floating-point and high-precision cross-checks.
+# programs are independent floating-point and high-precision cross-checks. The sat check is
+# the computer part of Theorem C: the boundary configuration is refuted by CaDiCaL and every
+# proof is checked by drat-trim.
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -20,7 +24,8 @@ BUILD="$(mktemp -d)"
 trap 'rm -rf "$BUILD"' EXIT
 CC_BIN="${CC:-cc}"
 CXX_BIN="${CXX:-c++}"
-CHECKS="${CHECKS-python julia c cpp}"
+CHECKS="${CHECKS-python julia c cpp sat}"
+SAT_MS="${SAT_MS:-3 4 5 6 7 8 9 10 11}"
 SKIP_LEAN="${SKIP_LEAN:-0}"
 [ "${1:-}" = "--no-lean" ] && SKIP_LEAN=1
 
@@ -33,6 +38,7 @@ for c in $CHECKS; do
     julia) need julia ;;
     c) need "$CC_BIN" ;;
     cpp) need "$CXX_BIN" ;;
+    sat) need python3; need "${CADICAL:-cadical}"; need "${DRATTRIM:-drat-trim}" ;;
     *) echo "unknown check: $c" >&2; exit 2 ;;
   esac
 done
@@ -80,6 +86,10 @@ for c in $CHECKS; do
       step "C++"
       "$CXX_BIN" -O2 -std=c++20 -o "$BUILD/check_cpp" "$ROOT/checks/cpp/check.cpp"
       "$BUILD/check_cpp" ;;
+    sat)
+      step "SAT: the boundary configuration of Theorem C, m = $SAT_MS"
+      # shellcheck disable=SC2086
+      bash "$ROOT/checks/sat/run_sat.sh" $SAT_MS ;;
   esac
 done
 
