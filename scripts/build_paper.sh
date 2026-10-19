@@ -4,6 +4,7 @@
 #   dist/UnionClosedLimit_final2.pdf               the paper
 #   dist/UnionClosedLimit_final2-tex.zip           LaTeX source (main.tex) with the figures as PNG
 #   dist/UnionClosedLimit_final2-arxiv.tar.gz      the same source as an arXiv tarball
+#   dist/UnionClosedLimit_EJC.pdf, -tex.zip        the journal version (journal/ejc/build.sh)
 #   preprintUnionClosedLimit/UnionClosedLimit.pdf   the paper (the only file there)
 #   MasterUnionClosedLimit_masterzipfinal2.zip      every tracked file with dist/ and the
 #                                                   preprint folder
@@ -58,6 +59,9 @@ mv "$STAGE/${NAME}_final2-tex.zip" dist/
 entries="$(zipinfo -1 "dist/${NAME}_final2-tex.zip" | wc -l)"
 [ "$entries" -le 512 ] || { echo "build_paper.sh: the tex zip has $entries entries (at most 512)" >&2; exit 1; }
 tar -czf "dist/${NAME}_final2-arxiv.tar.gz" -C "$SRC" main.tex figures
+
+echo "== journal version (The Electronic Journal of Combinatorics)"
+bash journal/ejc/build.sh > /dev/null
 
 echo "== $MASTER"
 mkdir -p "$STAGE/master/Master$NAME"
