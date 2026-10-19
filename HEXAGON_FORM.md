@@ -17,13 +17,13 @@ Human understanding: "All parts" only after both authors have read every proof; 
 
 Provenance statement: The proofs, the text, the figures and the Python, C, C++, Julia, Lean and shell programs were carried out by Deep Bhattacharjee with AI assistance (Claude, Anthropic) in the Claude Code environment. The entropy reduction and the covering of the unit square follow Jiang (arXiv:2609.08291), and the interval program is adapted from Jiang's Appendix B (CC BY 4.0); the paper credits them. The new step is the construction at the exact limit, with both gaps and their gradients vanishing at (q*, q*), and the ball-arithmetic certificate that the Hessians are positive definite on a square around that point. The limit C* itself and the fact that it bounds the method are due to Jiang and to Moffat; the paper proves that it is attained. Frankl's conjecture (the constant 1/2) is not proved. Both authors approved the final version.
 
-Tools used: Anthropic - Claude (Claude Code); Python with python-flint (Arb ball arithmetic); C; C++; Julia; Lean 4 (v4.34.1); shell.
+Tools used: Anthropic - Claude (Claude Code); the BLLM engine Anaxia v3.0.5 (doi:10.5281/zenodo.23469389) for the literature and status checks; Python with python-flint (Arb ball arithmetic); C; C++; Julia; Lean 4 (v4.34.1); shell.
 arXiv identifier: none (not posted on arXiv).
 
 Source files or ZIP: UnionClosedLimit_final2-tex.zip (the folder UnionClosedLimit_final2-tex/ with main.tex and figures/ as PNG; compiles with pdflatex in two passes, no BibTeX pass). Do not upload the master zip here.
 AI provenance files: AI_PROVENANCE_UnionClosedLimit.md
 License: CC BY 4.0
 
-Data availability (in the paper): the programs, the LaTeX source and the figure programs are in https://github.com/creelie/eUUR and its Zenodo archive (release v1.0.0).
+Data availability (in the paper): the programs, the LaTeX source and the figure programs are in https://github.com/creelie/eUUR and its Zenodo archive (release v1.0.0, doi:10.5281/zenodo.23480219; all versions doi:10.5281/zenodo.23480218).
 AI disclosure (in the paper, Data and code availability): Deep Bhattacharjee carried out the computations and the Python, C, C++, Julia, Lean and shell verifications with AI assistance (Claude, Anthropic). No separate AI declaration.
 Funding: none. Competing interests: none.

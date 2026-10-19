@@ -5,6 +5,7 @@ and Ushashi Bhattacharya (ORCID 0009-0002-2254-3914).
 
 - Paper: https://github.com/creelie/eUUR/blob/main/preprintUnionClosedLimit/UnionClosedLimit.pdf
 - Repository: https://github.com/creelie/eUUR
+- Archive: release v1.0.0, doi:10.5281/zenodo.23480219 (all versions doi:10.5281/zenodo.23480218)
 
 ## Result
 
@@ -33,7 +34,7 @@ following:
 - the figures;
 - the LaTeX text of the paper.
 
-No other AI system took part. The reduction, the profile shape and the
+The BLLM engine Anaxia (release v3.0.5, doi:10.5281/zenodo.23469389; github.com/creelie/eBLLM) supplied the status check, from its indexes of DeepMind's formal-conjectures collection and of the OpenRefute archive, and the record of the routes tried beyond C*, among them Roos's conjecture, which implies Frankl's conjecture. The paper says so in a footnote of Section VII, in the data availability section and in its bibliography. The construction, the proofs and the certificates were not produced by the engine. No other AI system took part. The reduction, the profile shape and the
 covering of the unit square are Jiang's, and the paper credits them.
 
 ## How the result is checked
