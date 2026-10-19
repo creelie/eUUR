@@ -14,6 +14,8 @@ C* is the exact limit of the entropy method in the form of Liu and Jiang: no cho
 
 Frankl's conjecture itself (the constant 1/2) remains open.
 
+Archive: release v1.0.0, [doi:10.5281/zenodo.23480219](https://doi.org/10.5281/zenodo.23480219); all versions [doi:10.5281/zenodo.23480218](https://doi.org/10.5281/zenodo.23480218).
+
 ## Layout
 
 | Path | Content |
