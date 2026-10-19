@@ -1,0 +1,54 @@
+{
+  "title": "Attaining the entropy limit for union-closed families: paper, interval verification and checks",
+  "description": "<p>We prove that every finite union-closed family with a nonempty member has an element lying in at least a fraction C* = 0.38288525996679779... of its members, where C* = 1/2 - (1 - q*) ln(1 + q*)/(2 ln 2) and q* is the root in (0, 1) of (1 - q) ln(1 - q) + q ln(1 + q) = 0. C* is the exact limit of the entropy method in the form of Liu and Jiang (arXiv:2609.08291); the best constants proved before were 0.38288525 (Jiang) and 0.3828852549667978 (Costa and Sadhu, arXiv:2610.02295). The auxiliary function is chosen so that both inequalities of the method, and their gradients, vanish at (q*, q*); their Hessians are certified positive definite on a square around that point, and an interval covering handles the rest of the unit square. With Jiang's global coupling the bound is strict: C* + ln^2(2N-1)/(128 N^2 ln^2 N) for a family of N &gt;= 2 members.</p><p><code>preprintUnionClosedLimit/</code> holds the paper as a PDF; <code>paper/</code> holds the LaTeX source (REVTeX 4.2) with four 3D figures; <code>dist/</code> holds the PDF, the LaTeX source zip and the arXiv tarball; <code>MasterUnionClosedLimit_masterzipfinal2.zip</code> holds every file of the repository. <code>checks/python/</code> holds the proof programs: <code>tangency.py</code> (ball-arithmetic Hessian certificate, python-flint) and <code>verify_exact.py</code> (interval certificate, adapted from Appendix B of Jiang's paper); <code>checks/c</code>, <code>checks/cpp</code> and <code>checks/julia</code> hold cross-checks; <code>lean/</code> checks the rational breakpoints in the Lean 4 kernel with no axioms. <code>scripts/run_all.sh</code> runs everything.</p>",
+  "upload_type": "software",
+  "license": "mit",
+  "access_right": "open",
+  "creators": [
+    {
+      "name": "Bhattacharjee, Deep",
+      "orcid": "0000-0003-0466-750X",
+      "affiliation": "Formerly, Electro-Gravitational Space Propulsion Laboratory (EGSPL), Bhubaneswar, Odisha 751030, India; Formerly, University of Calcutta, Senate House, 87/1 College Street, Kolkata 700073, West Bengal, India"
+    },
+    {
+      "name": "Bhattacharya, Ushashi",
+      "orcid": "0009-0002-2254-3914",
+      "affiliation": "Formerly, National Taiwan University, Taipei 106319, Taiwan"
+    }
+  ],
+  "keywords": [
+    "union-closed sets conjecture",
+    "Frankl's conjecture",
+    "entropy method",
+    "interval arithmetic",
+    "Lean 4",
+    "05D05",
+    "94A17",
+    "65G30"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "arXiv:2609.08291",
+      "relation": "references",
+      "scheme": "arxiv"
+    },
+    {
+      "identifier": "arXiv:2610.02295",
+      "relation": "references",
+      "scheme": "arxiv"
+    },
+    {
+      "identifier": "arXiv:2306.08824",
+      "relation": "references",
+      "scheme": "arxiv"
+    },
+    {
+      "identifier": "arXiv:2211.09055",
+      "relation": "references",
+      "scheme": "arxiv"
+    }
+  ],
+  "language": "eng",
+  "version": "1.0.0",
+  "notes": "Corresponding author: Deep Bhattacharjee, itsdeep@live.com (primary), d.bhattacharjee@erl-forschung.de. Ushashi Bhattacharya: rai.bhattacharya.in@gmail.com."
+}

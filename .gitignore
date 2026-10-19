@@ -1,0 +1,11 @@
+__pycache__/
+lean/.lake/
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.toc
+paper/*.fls
+paper/*.fdb_latexmk
+paper/*Notes.bib
+paper/build.log
+checks/python/*.json
