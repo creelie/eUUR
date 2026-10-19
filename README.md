@@ -26,7 +26,8 @@ Archive: release v1.1.0, [doi:10.5281/zenodo.23484214](https://doi.org/10.5281/z
 |---|---|
 | `paper/` | LaTeX source (REVTeX 4.2, single `main.tex`, bibliography inline) and the figures as PNG |
 | `preprintUnionClosedLimit/` | the paper as a PDF |
-| `dist/` | the PDF, the LaTeX source zip and the arXiv tarball |
+| `dist/` | the PDF, the LaTeX source zip and the arXiv tarball, and the version for The Electronic Journal of Combinatorics (`UnionClosedLimit_EJC.pdf`, `UnionClosedLimit_EJC-tex.zip`) |
+| `journal/ejc/` | the journal's style file `e-jc.sty`, `make_ejc.py`, which writes the journal version of `paper/main.tex`, and `build.sh`, which builds it |
 | `checks/python/tangency.py` | ball-arithmetic certificate (python-flint, 200 bits) that the Hessians of the three gap functions are positive definite on S = [q* − 0.008, q* + 0.008]², and that the values and gradients vanish at (q*, q*) |
 | `checks/python/verify_exact.py` | interval certificate of (K), (M) and the scalar inequalities on the rest of the unit square, adapted from the program of Appendix B of Jiang's paper |
 | `checks/c`, `checks/cpp`, `checks/julia` | cross-checks of q*, C*, the closed-form Hessians and the sign of the gaps on fine grids |
