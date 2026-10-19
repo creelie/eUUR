@@ -28,6 +28,7 @@
 
 \newcommand{\EE}{\mathbb{E}}
 \newcommand{\cF}{\mathcal{F}}
+\newcommand{\cA}{\mathcal{A}}
 \newcommand{\qs}{q^{*}}
 \newcommand{\Cs}{C^{*}}
 \newcommand{\codeDOI}{\href{https://github.com/creelie/eUUR}{\nolinkurl{github.com/creelie/eUUR}}}
@@ -55,11 +56,11 @@
 
 \begin{abstract}
 \itshape
-We prove that every finite union-closed family with a nonempty member has an element that lies in at least $0.38288525996\ldots$ of its members. This number is the exact limit of the entropy method in the form developed by Liu and Jiang, and earlier work had come within a hundred-millionth of it without reaching it. The proof chooses the auxiliary function so that the two inequalities behind the method touch zero at a single point, and shows by a convexity argument that they stay nonnegative around it. With a global coupling of Jiang, the bound is strict for every family.
-\par\medskip\upshape\noindent\textit{2020 Mathematics Subject Classification.} 05D05; 94A17; 65G30.
+We prove that every finite union-closed family with a nonempty member has an element that lies in at least $0.38288525996\ldots$ of its members. This number is the exact limit of the entropy method in the form developed by Liu and Jiang, and earlier work had come within a hundred-millionth of it without reaching it. The proof chooses the auxiliary function so that the two inequalities behind the method touch zero at a single point, and shows by a convexity argument that they stay nonnegative around it. With a global coupling of Jiang, the bound is strict for every family. We also prove the conjecture itself for every family of at most fifty-two members, two more than was known, by reducing a smallest counterexample to two families of down-sets of an unknown order and refuting them with a checked satisfiability proof.
+\par\medskip\upshape\noindent\textit{2020 Mathematics Subject Classification.} 05D05; 94A17; 65G30; 68V15.
 \end{abstract}
 
-\keywords{union-closed sets conjecture; Frankl's conjecture; entropy method; interval arithmetic}
+\keywords{union-closed sets conjecture; entropy method; interval arithmetic; satisfiability}
 
 \maketitle
 \makeatletter\renewcommand\l@subsection[2]{}\renewcommand\l@subsubsection[2]{}\makeatother
@@ -103,6 +104,14 @@ p\ \ge\ \Cs+\frac{\ln^2(2N-1)}{128\,N^2\ln^2 N}\ >\ \Cs .
 
 The margin in Theorem~\ref{thm:strict} tends to zero, so it does not raise $c_{\mathrm{UC}}$ above $\Cs$; by the results just quoted, going further needs an argument outside the single-letter framework. Figure~\ref{fig:records} places the certified constants.
 
+The second result of the paper concerns small families. Frankl's conjecture is known for every family with at most $50$ members, which follows from the bound of Roberts and Simpson \cite{RS10} on the size of a smallest counterexample and the verification of the conjecture for ground sets of at most $12$ elements \cite{VZ17,BS15}. We exclude the boundary case of that bound.
+
+\begin{mainthm}\label{thm:small}
+Every union-closed family with at most $52$ members that contains a nonempty set has an element lying in at least half of its members.
+\end{mainthm}
+
+The proof (Section~\ref{sec:small}) reduces a hypothetical counterexample with $51$ members on $13$ elements to two families of down-sets of an unknown partial order on $11$ points, with four constraints derived by hand, and shows by a satisfiability computation with a checked proof certificate that no such pair exists. Without the computer, the same reduction proves that such a counterexample, of any size $4m-1$ on $m$ elements, must contain two elements one of which lies in every member containing the other (Proposition~\ref{prop:nodom}).
+
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/fig_records.png}
@@ -121,7 +130,7 @@ The margin in Theorem~\ref{thm:strict} tends to zero, so it does not raise $c_{\
 \label{fig:gaps}
 \end{figure*}
 
-\paragraph*{Plan.} Section~\ref{sec:reduction} states the entropy reduction. Section~\ref{sec:construction} fixes the functions at the limit and Section~\ref{sec:tangency} proves the contact at $(\qs,\qs)$ and the convexity around it. Section~\ref{sec:rest} covers the rest of the square, Section~\ref{sec:proofs} proves the two theorems and Section~\ref{sec:beyond} discusses what lies beyond $\Cs$. Appendices~\ref{app:reduction} to~\ref{app:strict} give every derivation in full.\footnote{The authors' other work, on analytic estimates in number theory, is in \cite{BNFS26,BB26}; the archive of this paper is \cite{BB26z}.}
+\paragraph*{Plan.} Section~\ref{sec:reduction} states the entropy reduction. Section~\ref{sec:construction} fixes the functions at the limit and Section~\ref{sec:tangency} proves the contact at $(\qs,\qs)$ and the convexity around it. Section~\ref{sec:rest} covers the rest of the square, Section~\ref{sec:proofs} proves the first two theorems and Section~\ref{sec:beyond} discusses what lies beyond $\Cs$. Section~\ref{sec:small} proves Theorem~\ref{thm:small}. Appendices~\ref{app:reduction} to~\ref{app:boundary} give every derivation in full.\footnote{The authors' other work, on analytic estimates in number theory, is in \cite{BNFS26,BB26}; the archive of this paper is \cite{BB26z}.}
 
 %----------------------------------------------------------------------
 \section{The entropy reduction}\label{sec:reduction}
@@ -342,8 +351,62 @@ Theorem~\ref{thm:main} closes the gap between what the reduction (K)--(M) can ce
 A useful structural fact holds for every union-closed family: if the next bit of a prefix $\alpha$ is forced to be zero, so is the next bit of every prefix $\alpha'\subseteq\alpha$ that occurs.\footnote{If $\alpha'\subseteq\alpha$ are both prefixes of members and some member extending $\alpha'$ had bit $1$ at the next coordinate, its union with a member extending $\alpha$ would extend $\alpha$ and have bit $1$ there.} So the set of prefixes at which an element is surely absent is a down-set. The adversarial laws behind the ceilings place such prefixes freely. An argument that uses the down-set structure, for instance through a correlation inequality of Harris type across coordinates, is not covered by the ceilings; we do not know whether it gives more.
 
 %----------------------------------------------------------------------
+\section{Families of at most fifty-two members}\label{sec:small}
+
+In this section a \emph{counterexample} is a finite union-closed family $\cA$ with a nonempty member in which every element lies in fewer than half of the members. Fix a counterexample $\cA$ with the least possible number of members, write $U=\bigcup\cA$ (a member) and $m=|U|$. For $i\in U$ let $A_i$ be the union of the members avoiding $i$, which is the largest member avoiding $i$, and write $|x|$ for the number of members containing $x$. We say that $j$ \emph{dominates} $x$, and write $x\preceq j$, if every member containing $x$ contains $j$; then $x\notin A_j$ exactly when $x\preceq j$, so $D(j)=U\setminus A_j$ is the set of elements dominated by $j$.\footnote{Domination is the order of the join-irreducible elements of the lattice $\cA$ read backwards. It is reflexive and transitive, and on a separating family it is antisymmetric, because two elements dominating each other lie in the same members.}
+
+\begin{lemma}\label{lem:smallest}
+$\cA$ may be taken separating, $|\cA|=2n+1$ with every frequency at most $n$ and some frequency equal to $n$, $m\ge 13$ and $n\ge 2m-1$.
+\end{lemma}
+
+The first three claims are standard; the fourth is the theorem for at most $12$ elements \cite{VZ17}, and the last is the bound of Roberts and Simpson \cite{RS10}, in the form proved by Hu \cite{Hu17}. Appendix~\ref{app:boundary} proves all but the fourth. An element of frequency $n$ is called a \emph{top}.
+
+\paragraph*{The boundary case.} Suppose now $n=2m-1$, so $|\cA|=4m-1$. Appendix~\ref{app:boundary} shows that every top $t$ has a \emph{partner} $p$, another top, such that the members containing both $t$ and $p$ are exactly $U$ and the $A_i$ with $i\in W=U\setminus\{t,p\}$. Counting then splits $\cA$ into four blocks by membership of $t$ and $p$ (Figure~\ref{fig:blocks}): $P_{11}$ with $m-1$ members and $P_{10}$, $P_{01}$, $P_{00}$ with $m$ members each.\footnote{The block $P_{10}$ consists of the members containing $t$ and not $p$, and so on. The sizes follow from $|t|=|p|=2m-1$ and $|P_{11}|=m-1$: $|P_{10}|=|P_{01}|=(2m-1)-(m-1)=m$ and $|P_{00}|=(4m-1)-(m-1)-2m=m$.} For a member $X$ of $P_{10}$ put $R_X=W\setminus X$, and for $Y\in P_{01}$ put $S_Y=W\setminus Y$. Let $\mathcal R$ and $\mathcal S$ be the two resulting families of subsets of $W$, and for $x\in W$ let $r(x)$ and $s(x)$ count the members of $\mathcal R$ and $\mathcal S$ that contain $x$.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/fig_blocks.png}
+\caption{The boundary case $|\cA|=4m-1$. Left: the four blocks of members by membership of a top $t$ and its partner $p$; every union of a member of $P_{10}$ and one of $P_{01}$ falls into the $m-1$ members of $P_{11}$. Right: the size of the satisfiability problem of Theorem~\ref{thm:sat} and the time CaDiCaL takes to refute it, for $m=3,\dots,13$.}
+\label{fig:blocks}
+\end{figure*}
+
+\begin{lemma}\label{lem:RS}
+Write $\le$ for domination restricted to $W$. Then:
+\begin{enumerate}
+\item[(a)] $\le$ is a partial order on $W$, and $D(j)=\{x\in W: x\le j\}$ for $j\in W$;
+\item[(b)] $\mathcal R$ and $\mathcal S$ each consist of $m$ distinct down-sets of $(W,\le)$ and are closed under intersection;
+\item[(c)] for every $R\in\mathcal R$ and $S\in\mathcal S$, $R\cap S$ is empty or equal to $D(j)$ for some $j\in W$;
+\item[(d)] $r(x)+s(x)\ge m-1$ for every $x\in W$.
+\end{enumerate}
+\end{lemma}
+
+The proof is in Appendix~\ref{app:boundary}. Conditions (a) to (d) mention only $W$, which has $m-2$ points, and two families of $m$ sets; they no longer describe a union-closed family, and the order is unknown. Nevertheless they are contradictory, by hand when the order is trivial and by computer for $m\le13$.
+
+\begin{proposition}\label{prop:nodom}
+For every $m\ge4$ there is no configuration as in Lemma~\ref{lem:RS} in which $\le$ is trivial. Hence in a smallest counterexample with $4m-1$ members, for every top $t$ and partner $p$, some element of $U\setminus\{t,p\}$ is dominated by another.
+\end{proposition}
+
+The proof, a counting argument on the sizes of the largest members of $\mathcal R$ and $\mathcal S$, is in Appendix~\ref{app:boundary}. When $\le$ is not trivial, $R\cap S$ may be a down-set with several points and the count loses its slack; we have not found a hand argument for that case.
+
+\begin{theorem}\label{thm:sat}
+For $3\le m\le 13$ there is no configuration as in Lemma~\ref{lem:RS}, whatever the partial order.
+\end{theorem}
+
+\begin{proof}
+Encode (a) to (d) in propositional logic, with one variable for each pair $x<j$ of a naturally labelled order on $W=\{0,\dots,m-3\}$ (every partial order has a linear extension, so the labels may be chosen to increase along the order), one for each membership $x\in R$ and $x\in S$, and selector variables for the intersections required by (b) and (c). Transitivity, the down-set property and the selectors are clauses of at most four literals; distinctness is imposed by listing the members of each family in strictly increasing lexicographic order, which loses no generality; (d) is a cardinality constraint written as a sequential counter. For $m=13$ the formula has $8{,}929$ variables and $121{,}290$ clauses. The solver CaDiCaL reports each formula unsatisfiable and writes a DRAT proof, and the independent checker drat-trim verifies every proof.\footnote{The formula is written by \texttt{checks/sat/boundary\_cnf.py} and the solver and checker are run by \texttt{checks/sat/run\_sat.sh} in the archive \cite{BB26z}. For $m=13$ the solver needs about $15$ minutes on one core and its proof has about one gigabyte. Two further checks guard the encoding. Weakening (d) to $r+s\ge m-3$ makes the formula satisfiable for $m=7,8$, and the decoded solutions satisfy (a) to (d) in that weakened form when tested directly, so the clauses do not exclude more than they should. A second encoding, written separately on the python-sat library, gives the same answer for every $m\le13$ (with its own proof for $m=13$, also verified by drat-trim), and for $m=6,7,8$ the result agrees with integer programs solved separately for each nontrivial partial order on $4$, $5$ and $6$ points ($15$, $62$ and $317$ orders up to isomorphism).}
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:small}]
+Suppose a counterexample with at most $52$ members exists, and let $\cA$ be one with the fewest members. By Lemma~\ref{lem:smallest}, $|\cA|=2n+1\le 52$, so $n\le 25$, while $n\ge 2m-1\ge 25$. Hence $m=13$ and $n=2m-1$, which is the boundary case. Lemma~\ref{lem:RS} gives a configuration on $11$ points with $m=13$, and Theorem~\ref{thm:sat} says that none exists.
+\end{proof}
+
+\begin{remark}\label{rem:fiftythree}
+The next sizes are not reached by the same method. A smallest counterexample with $53$ members has $n=26$ and, by Lemma~\ref{lem:smallest}, $m=13$, so $n=2m$ lies one step above the boundary case and the blocks no longer have the sizes used above. The configuration of Lemma~\ref{lem:RS} for $m=14$ (a counterexample with $55$ members on $14$ elements) is a formula of the same kind, about four times larger; it also needs the theorem for $13$-element ground sets, which is open.
+\end{remark}
+
+%----------------------------------------------------------------------
 \section*{Data and code availability}
-The interval programs, the Hessian certification, independent checks in C, C\texttt{++} and Julia, the Lean~4 check of the rational breakpoints, the figure programs and the \LaTeX{} source are in the repository \codeDOI{} and its Zenodo archive, doi:10.5281/zenodo.23480219 \cite{BB26z}. The literature and status checks and the record of the routes tried beyond $\Cs$ were made with the BLLM engine Anaxia, release v3.0.5 \cite{Ana26}. Deep Bhattacharjee carried out the computations and the Python, C, C\texttt{++}, Julia, Lean and shell verifications with AI assistance (Claude, Anthropic).
+The interval programs, the Hessian certification, the encoder of Theorem~\ref{thm:sat} with the script that runs CaDiCaL and checks its proofs with drat-trim, independent checks in C, C\texttt{++} and Julia, the Lean~4 check of the rational breakpoints, the figure programs and the \LaTeX{} source are in the repository \codeDOI{} and its Zenodo archive, doi:10.5281/zenodo.23480218 \cite{BB26z}. The literature and status checks and the record of the routes tried beyond $\Cs$ were made with the BLLM engine Anaxia, release v3.0.5 \cite{Ana26}. Deep Bhattacharjee carried out the computations and the Python, C, C\texttt{++}, Julia, Lean and shell verifications with AI assistance (Claude, Anthropic).
 
 \section*{Ethical declarations}
 Funding: none. Competing interests: none.
@@ -528,6 +591,50 @@ p\ \ge\ \Cs+\frac{V}{32\ln^2N}\ \ge\ \Cs+\frac{\ln^2(2N-1)}{128\,N^2\ln^2 N}.
 \]
 
 %----------------------------------------------------------------------
+\section{The boundary configuration}\label{app:boundary}
+
+This appendix proves Lemma~\ref{lem:smallest} (except $m\ge13$), the existence of partners, Lemma~\ref{lem:RS} and Proposition~\ref{prop:nodom}. Throughout, $\cA$ is a counterexample with the fewest members.
+
+\paragraph*{Separation.} If two elements $x,y$ lie in the same members, deleting $y$ from every member gives a union-closed family with the same number of members (two members cannot differ only in $y$) and the same frequencies. So among the counterexamples with the fewest members we may take one on the fewest elements, and it is separating: any two elements are distinguished by a member.
+
+\paragraph*{Odd size.} A member $B$ that is minimal under inclusion is not a union of other members, so $\cA\setminus\{B\}$ is again union-closed, and it still has a nonempty member. If $|\cA|=2k$, every frequency is at most $k-1<\frac{2k-1}{2}$, so $\cA\setminus\{B\}$ would be a smaller counterexample. Hence $|\cA|=2n+1$ and every frequency is at most $n$. If every frequency were at most $n-1$, removing $B$ would again give a counterexample. So some element has frequency $n$.
+
+\paragraph*{Tops lie in every $A_i$.} Let $t$ be a top and $i\neq t$. If $t\notin A_i$, then $t\preceq i$, so the members containing $t$ are among those containing $i$; since $|i|\le n=|t|$ they are the same members, against separation. So $t\in A_i$. The members $A_i$ are pairwise distinct: if $A_i=A_j$ with $i\ne j$, a member containing exactly one of $i,j$, say $j$, avoids $i$ and so lies in $A_i$, which then contains $j$. Hence $\mathcal S_t=\{U\}\cup\{A_i:i\ne t\}$ is a set of $m$ distinct members containing $t$.
+
+\paragraph*{The bound $n\ge2m-1$.} The family $\cA^t$ of members avoiding $t$ has $n+1$ members, is union-closed and has $A_t$ as its largest member. If $n=0$ then $\cA=\{U\}$, which is not a counterexample, so $n\ge1$ and $A_t\ne\emptyset$. By minimality $\cA^t$ is not a counterexample, so the set $Q$ of elements lying in at least $\frac{n+1}{2}$ members of $\cA^t$ is not empty. Choose $p\in Q$ maximal for $\preceq$. If $i\notin\{t,p\}$ and $p\notin A_i$, then $p\preceq i$, every member of $\cA^t$ containing $p$ contains $i$, so $i\in Q$, and $p\preceq i$ contradicts the maximality of $p$. So $p$ lies in $U$ and in every $A_i$ with $i\notin\{t,p\}$, that is, in $m-1$ members of $\mathcal S_t$, and
+\[
+n\ \ge\ |p|\ \ge\ \frac{n+1}{2}+m-1,
+\]
+which is $n\ge 2m-1$.\footnote{This is the argument of Hu \cite{Hu17}; the choice of $p$ maximal for domination is what makes $p\in A_i$ automatic. The bound itself is due to Roberts and Simpson \cite{RS10}.}
+
+\paragraph*{Partners.} If $n=2m-1$, every inequality in the display is an equality. So $p$ is a top, it lies in exactly $m$ members of $\cA^t$ and in exactly $m-1$ members containing $t$, and these are $U$ and the $A_i$ with $i\in W=U\setminus\{t,p\}$. This $p$ is a partner of $t$.
+
+\paragraph*{Proof of Lemma~\ref{lem:RS}.} (a) Domination is reflexive and transitive, and antisymmetric by separation. For $j\in W$ we have $D(j)=U\setminus A_j$, and $t,p\in A_j$ by the two paragraphs above, so $D(j)\subseteq W$.
+
+(b) A member $X\in P_{10}$ is $\{t\}\cup(W\setminus R_X)$, so $X\mapsto R_X$ is injective and $\mathcal R$ has $m$ members. If $j\in R_X$ and $x\le j$, then $x\notin X$, because $x\in X$ would force $j\in X$; so $R_X$ is a down-set. For $X,X'\in P_{10}$ the union $X\cup X'$ lies in $P_{10}$ and $R_{X\cup X'}=R_X\cap R_{X'}$. The same holds for $\mathcal S$.
+
+(c) For $X\in P_{10}$ and $Y\in P_{01}$, the union $X\cup Y$ contains $t$ and $p$, so it is $U$ or some $A_j$ with $j\in W$. Hence $R_X\cap S_Y=W\setminus(X\cup Y)$ is empty or $W\setminus A_j=D(j)$.
+
+(d) Let $x\in W$. At least $(4m-1)-(2m-1)=2m$ members avoid $x$: $r(x)$ of them in $P_{10}$, $s(x)$ in $P_{01}$, at most $m$ in $P_{00}$, and in $P_{11}$ the members $A_j$ with $x\in D(j)$, whose number is $d(x)=|\{j\in W:x\le j\}|$. So $r(x)+s(x)\ge m-d(x)$. Take $j\in W$ maximal with $x\le j$. Then $d(j)=1$, so $r(j)+s(j)\ge m-1$, and since the members of $\mathcal R$ and $\mathcal S$ are down-sets, $r(x)\ge r(j)$ and $s(x)\ge s(j)$. \qed
+
+\paragraph*{Proof of Proposition~\ref{prop:nodom}.} Suppose $\le$ is trivial, so $D(j)=\{j\}$ and, by (c), $|R\cap S|\le1$ for all $R\in\mathcal R$, $S\in\mathcal S$. Write $w=m-2$. By (b) each family has a least member, $R_0$ and $S_0$, contained in all its members; $|R_0\cap S_0|\le 1$.
+
+\emph{Case $R_0\cap S_0=\{z\}$.} Then $R\cap S=\{z\}$ for all $R,S$. A point $y\ne z$ lying in some $R$ and some $S$ would give $|R\cap S|\ge2$, so every $y\neq z$ lies only in members of $\mathcal R$ or only in members of $\mathcal S$; call these sets of points $X_R$ and $X_S$. By (d), a point of $X_R$ has $r\ge m-1$, so it is missing from at most one member of $\mathcal R$. The sets $X_R\setminus R$, $R\in\mathcal R$, are therefore pairwise disjoint, and they are distinct because the members $R=\{z\}\cup(R\cap X_R)$ are distinct. At most one of them is empty, so $|X_R|\ge m-1$; likewise $|X_S|\ge m-1$. But $|X_R|+|X_S|\le w-1=m-3$.
+
+\emph{Case $R_0\cap S_0=\emptyset$.} Let $\alpha,\beta$ be the largest sizes in $\mathcal R$ and $\mathcal S$, and let $\delta_R=\sum(\alpha-|R|)$ over the $m-1$ members $R\neq R_0$, and $\delta_S$ likewise. A point of $R_0$ lies in all $m$ members of $\mathcal R$ and a point of $S_0$ in all of $\mathcal S$. Counting incidences with (d),
+\begin{align*}
+|R_0|+|S_0|&+(m-1)(\alpha+\beta)-\delta_R-\delta_S=\sum_{x\in W}\bigl(r(x)+s(x)\bigr)\\
+&\ge (m-1)\,w+|R_0|+|S_0|,
+\end{align*}
+so $\delta_R+\delta_S\le(m-1)(\alpha+\beta-w)$. A largest $R$ and a largest $S$ meet in at most one point, so $\alpha+\beta\le w+1$, and the inequality forces $\alpha+\beta\ge w$.
+
+If $\alpha+\beta=w$, then $\delta_R=0$: every $R\neq R_0$ has size $\alpha$, and two of them meet in a smaller member, which can only be $R_0$. So the $m-1$ sets $R\setminus R_0$ are nonempty and pairwise disjoint in $w-|R_0|<m-1$ points, which is impossible.
+
+So $\alpha+\beta=w+1$ and $\delta_R+\delta_S\le m-1$. Now a largest $R$ and a largest $S$ meet in exactly one point and together cover $W$. Let $k_R,k_S$ be the numbers of largest members. Each member other than the least and the largest ones adds at least $1$ to $\delta$, so $k_R+k_S\ge 2(m-1)-(\delta_R+\delta_S)\ge m-1\ge3$, and we may assume $k_R\ge2$. If $R_1\ne R_2$ are largest, every largest $S$ contains $(W\setminus R_1)\cup(W\setminus R_2)=W\setminus(R_1\cap R_2)$, which has at least $w-\alpha+1=\beta$ points; so $|R_1\cap R_2|=\alpha-1$ and $S=W\setminus(R_1\cap R_2)$. Thus $k_S=1$, the largest member $O$ of $\mathcal S$ is unique, and every two largest members of $\mathcal R$ meet in $T=W\setminus O$, so they are $T\cup\{x\}$ for distinct points $x\in O$, where $|O|=\beta=w+1-\alpha$. Since $k_S=1$, $\delta_S\ge m-2$, hence $\delta_R\le1$. The set $T=R_1\cap R_2$ belongs to $\mathcal R$ and contains $R_0$.
+
+If $T=R_0$, every $R\neq R_0$ strictly contains $T$ and so has size at least $\alpha$: all $m-1$ of them are largest and give $m-1$ distinct points of $O$, while $|O|=w+1-\alpha\le m-2$. If $T\ne R_0$, then $T$ has size $\alpha-1$ and adds $1$ to $\delta_R$, so $\delta_R=1$ and the other $m-2$ members besides $R_0$ and $T$ are largest; they give $m-2$ distinct points of $O$, while $|O|=w+1-\alpha\le m-3$ because $\alpha\ge|T|+1\ge|R_0|+2\ge2$. Both are impossible. \qed
+
+%----------------------------------------------------------------------
 \begin{thebibliography}{99}\rightskip=0pt plus 3em
 
 \bibitem{AHS24} R.~Alweiss, B.~Huang and M.~Sellke, Improved lower bound for Frankl's union-closed sets conjecture, \emph{Electron. J. Combin.} \textbf{31}(3) (2024), P3.35, \href{https://doi.org/10.37236/12232}{doi:10.37236/12232}.
@@ -544,6 +651,8 @@ p\ \ge\ \Cs+\frac{V}{32\ln^2N}\ \ge\ \Cs+\frac{\ln^2(2N-1)}{128\,N^2\ln^2 N}.
 
 \bibitem{Gil22} J.~Gilmer, A constant lower bound for the union-closed sets conjecture, preprint (2022), \href{https://arxiv.org/abs/2211.09055}{arXiv:2211.09055}.
 
+\bibitem{Hu17} Y.~Hu, On the union-closed sets conjecture, preprint (2017), \href{https://arxiv.org/abs/1706.06167}{arXiv:1706.06167}.
+
 \bibitem{Jia26} Y.~Jiang, Entropy bounds and global couplings for union-closed families, preprint (2026), \href{https://arxiv.org/abs/2609.08291}{arXiv:2609.08291}.
 
 \bibitem{Liu23} J.~Liu, Improving the lower bound for the union-closed sets conjecture via conditionally IID coupling, preprint (2023), \href{https://arxiv.org/abs/2306.08824}{arXiv:2306.08824}; in \emph{Proc. 58th Annual Conference on Information Sciences and Systems} (2024), \href{https://doi.org/10.1109/CISS59072.2024.10480167}{doi:10.1109/CISS59072.2024.10480167}.
@@ -552,9 +661,13 @@ p\ \ge\ \Cs+\frac{V}{32\ln^2N}\ \ge\ \Cs+\frac{\ln^2(2N-1)}{128\,N^2\ln^2 N}.
 
 \bibitem{Peb22} L.~Pebody, Extension of a method of Gilmer, preprint (2022), \href{https://arxiv.org/abs/2211.13139}{arXiv:2211.13139}.
 
+\bibitem{RS10} I.~Roberts and J.~Simpson, A note on the union-closed sets conjecture, \emph{Australas. J. Combin.} \textbf{47} (2010), 265--267.
+
 \bibitem{Roo23} K.~Roos, On the union-closed conjecture of P\'eter Frankl, \emph{Nieuw Arch. Wiskd.} (5) \textbf{24} (2023), no.~4, 225--230.
 
 \bibitem{Saw22} W.~Sawin, An improved lower bound for the union-closed set conjecture, preprint (2022), \href{https://arxiv.org/abs/2211.11504}{arXiv:2211.11504}.
+
+\bibitem{VZ17} B.~Vu\v{c}kovi\'c and M.~\v{Z}ivkovi\'c, The $12$-element case of Frankl's conjecture, \emph{IPSI BgD Trans. Internet Res.} \textbf{13}(1) (2017), 65--71.
 
 \bibitem{Yu23} L.~Yu, Dimension-free bounds for the union-closed sets conjecture, \emph{Entropy} \textbf{25}(5) (2023), 767, \href{https://doi.org/10.3390/e25050767}{doi:10.3390/e25050767}.
 
@@ -564,7 +677,7 @@ p\ \ge\ \Cs+\frac{V}{32\ln^2N}\ \ge\ \Cs+\frac{\ln^2(2N-1)}{128\,N^2\ln^2 N}.
 
 \bibitem{Ana26} D.~Bhattacharjee and U.~Bhattacharya, Anaxia, the BLLM engine: verifier-gated conjecture closure, release v3.0.5 (2026), \href{https://doi.org/10.5281/zenodo.23469389}{doi:10.5281/zenodo.23469389} (all versions \href{https://doi.org/10.5281/zenodo.23286641}{doi:10.5281/zenodo.23286641}), with the paper \emph{BLLM: Beyond the LLM with Deep Human-Mind-AI}, \url{https://github.com/creelie/eBLLM}.
 
-\bibitem{BB26z} D.~Bhattacharjee and U.~Bhattacharya, Attaining the entropy limit for union-closed families: paper, interval verification and checks, repository \url{https://github.com/creelie/eUUR}, release v1.0.0 (2026), \href{https://doi.org/10.5281/zenodo.23480219}{doi:10.5281/zenodo.23480219} (all versions \href{https://doi.org/10.5281/zenodo.23480218}{doi:10.5281/zenodo.23480218}).
+\bibitem{BB26z} D.~Bhattacharjee and U.~Bhattacharya, Attaining the entropy limit for union-closed families: paper, interval verification and checks, repository \url{https://github.com/creelie/eUUR}, release v1.1.0 (2026), \href{https://doi.org/10.5281/zenodo.23480218}{doi:10.5281/zenodo.23480218}.
 
 \end{thebibliography}
 

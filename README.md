@@ -10,11 +10,15 @@ of its members, where q* = 0.69090773872540775… is the root in (0, 1) of (1 �
 
 **Theorem B.** A union-closed family of N ≥ 2 sets containing a nonempty set has an element in at least a fraction C* + ln²(2N − 1)/(128 N² ln² N) of its members.
 
+**Theorem C.** Every union-closed family with at most 52 members that contains a nonempty set has an element lying in at least half of its members. (Known before: at most 50 members.)
+
 C* is the exact limit of the entropy method in the form of Liu and Jiang: no choice of the functions in the two inequalities (K) and (M) gives more. The best constants proved before were 0.38288525 (Y. Jiang, arXiv:2609.08291) and 0.3828852549667978 (S. Costa and A. Sadhu, arXiv:2610.02295). The paper reaches C* by placing the centre of Jiang's profile exactly at q* and every weight at its limiting value, so that both gaps and their gradients vanish at (q*, q*), and proves that the Hessians are positive definite on a square around that point.
+
+Theorem C reduces a smallest counterexample with 51 members on 13 elements to two families of down-sets of an unknown partial order on 11 points with four constraints proved by hand (Lemma VIII.2 of the paper), and refutes them with CaDiCaL; every proof is checked by drat-trim. Without the computer, the same reduction shows that in a smallest counterexample with 4m − 1 members on m elements some element is dominated by another, for every m.
 
 Frankl's conjecture itself (the constant 1/2) remains open.
 
-Archive: release v1.0.0, [doi:10.5281/zenodo.23480219](https://doi.org/10.5281/zenodo.23480219); all versions [doi:10.5281/zenodo.23480218](https://doi.org/10.5281/zenodo.23480218).
+Archive: release v1.0.0, [doi:10.5281/zenodo.23480219](https://doi.org/10.5281/zenodo.23480219) (Theorems A, B); release v1.1.0 adds Theorem C; all versions [doi:10.5281/zenodo.23480218](https://doi.org/10.5281/zenodo.23480218).
 
 ## Layout
 
@@ -26,8 +30,11 @@ Archive: release v1.0.0, [doi:10.5281/zenodo.23480219](https://doi.org/10.5281/z
 | `checks/python/tangency.py` | ball-arithmetic certificate (python-flint, 200 bits) that the Hessians of the three gap functions are positive definite on S = [q* − 0.008, q* + 0.008]², and that the values and gradients vanish at (q*, q*) |
 | `checks/python/verify_exact.py` | interval certificate of (K), (M) and the scalar inequalities on the rest of the unit square, adapted from the program of Appendix B of Jiang's paper |
 | `checks/c`, `checks/cpp`, `checks/julia` | cross-checks of q*, C*, the closed-form Hessians and the sign of the gaps on fine grids |
+| `checks/sat/boundary_cnf.py` | writes the CNF of the boundary configuration of Theorem C for a given m |
+| `checks/sat/run_sat.sh` | solves it with CaDiCaL for m = 3, …, 13 and checks each DRAT proof with drat-trim |
+| `checks/sat/results.txt` | sizes of the formulas and solving times (m, variables, clauses, seconds) |
 | `lean/` | Lean 4 (core, no Mathlib): the order relations of the rational breakpoints, checked by the kernel with no axioms |
-| `figures/make_figures.py` | the four 3D figures |
+| `figures/make_figures.py` | the five figures |
 | `scripts/run_all.sh` | Lean build and axiom check, then every check |
 | `scripts/build_paper.sh` | the paper, `dist/`, the preprint folder and the master zip |
 
@@ -37,6 +44,8 @@ Archive: release v1.0.0, [doi:10.5281/zenodo.23480219](https://doi.org/10.5281/z
 python3 -m pip install -r checks/python/requirements.txt
 scripts/run_all.sh                 # needs elan, python3, julia, cc and c++
 CHECKS=python SKIP_LEAN=1 scripts/run_all.sh   # the proof programs only (about ninety seconds)
+CHECKS=sat SKIP_LEAN=1 scripts/run_all.sh      # Theorem C for m = 3..11 (about two minutes; needs cadical, drat-trim)
+checks/sat/run_sat.sh 12 13                    # the two largest cases (about 20 minutes to solve, longer to check)
 ```
 
 ## Licence

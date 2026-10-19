@@ -5,7 +5,7 @@ and Ushashi Bhattacharya (ORCID 0009-0002-2254-3914).
 
 - Paper: https://github.com/creelie/eUUR/blob/main/preprintUnionClosedLimit/UnionClosedLimit.pdf
 - Repository: https://github.com/creelie/eUUR
-- Archive: release v1.0.0, doi:10.5281/zenodo.23480219 (all versions doi:10.5281/zenodo.23480218)
+- Archive: release v1.0.0, doi:10.5281/zenodo.23480219; release v1.1.0 adds Theorem C (all versions doi:10.5281/zenodo.23480218)
 
 ## Result
 
@@ -18,6 +18,14 @@ that the constant C* itself holds for every family, and, with Jiang's global
 coupling, a strictly larger bound depending on the number of members. The best
 constants proved before were 0.38288525 (Jiang) and 0.3828852549667978 (Costa
 and Sadhu).
+
+The paper also proves the conjecture itself for every family of at most 52
+members (known before: 50). A smallest counterexample would have 51 members on
+13 elements; Appendix G reduces it by hand to two families of down-sets of an
+unknown order on 11 points, and the satisfiability solver CaDiCaL refutes that
+configuration, with every DRAT proof checked by drat-trim
+(checks/sat/run_sat.sh). The reduction, the encoding, the hand proofs and the
+checks were made with AI assistance (Claude, Anthropic) in Claude Code.
 
 ## Who did what
 
