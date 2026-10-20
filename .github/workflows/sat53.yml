@@ -1,0 +1,45 @@
+name: sat53
+
+# The 53-member step: refutes the configuration of checks/sat/above_cnf.py for
+# m = 13 (and m = 12) with CaDiCaL, checking the LRAT proof as it is written.
+# Long runs; started by hand or by a push that changes the encoder.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [claude/project-thread-9quuz3]
+    paths: [checks/sat/above_cnf.py, checks/sat/run_sat53.sh, .github/workflows/sat53.yml]
+
+jobs:
+  refute:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {m: "13", extra: ""}
+          - {m: "13", extra: "nontriv"}
+          - {m: "12", extra: ""}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build CaDiCaL and lrat-check
+        run: |
+          git clone --depth 1 --branch rel-2.1.3 https://github.com/arminbiere/cadical "$RUNNER_TEMP/cadical"
+          (cd "$RUNNER_TEMP/cadical" && ./configure > /dev/null && make -j2 > /dev/null)
+          git clone --depth 1 https://github.com/marijnheule/drat-trim "$RUNNER_TEMP/drat-trim"
+          (cd "$RUNNER_TEMP/drat-trim" && gcc -O2 -o lrat-check lrat-check.c)
+          echo "CADICAL=$RUNNER_TEMP/cadical/build/cadical" >> "$GITHUB_ENV"
+          echo "LRATCHECK=$RUNNER_TEMP/drat-trim/lrat-check" >> "$GITHUB_ENV"
+      - name: Refute m = ${{ matrix.m }} ${{ matrix.extra }}
+        run: |
+          if [ -n "${{ matrix.extra }}" ]; then
+            bash checks/sat/run_sat53.sh ${{ matrix.m }} -- ${{ matrix.extra }} | tee result.txt
+          else
+            bash checks/sat/run_sat53.sh ${{ matrix.m }} | tee result.txt
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sat53-m${{ matrix.m }}${{ matrix.extra }}
+          path: result.txt
