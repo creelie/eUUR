@@ -10,7 +10,7 @@ of its members, where q* = 0.69090773872540775… is the root in (0, 1) of (1 �
 
 **Theorem B.** A union-closed family of N ≥ 2 sets containing a nonempty set has an element in at least a fraction C* + ln²(2N − 1)/(128 N² ln² N) of its members.
 
-**Theorem C.** Every union-closed family with at most 52 members that contains a nonempty set has an element lying in at least half of its members. (Known before: at most 50 members.)
+**Theorem C.** Every union-closed family with at most 54 members that contains a nonempty set has an element lying in at least half of its members. (Known before: at most 50 members.)
 
 C* is the exact limit of the entropy method in the form of Liu and Jiang: no choice of the functions in the two inequalities (K) and (M) gives more. The best constants proved before were 0.38288525 (Y. Jiang, arXiv:2609.08291) and 0.3828852549667978 (S. Costa and A. Sadhu, arXiv:2610.02295). The paper reaches C* by placing the centre of Jiang's profile exactly at q* and every weight at its limiting value, so that both gaps and their gradients vanish at (q*, q*), and proves that the Hessians are positive definite on a square around that point.
 

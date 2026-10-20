@@ -56,7 +56,7 @@
 
 \begin{abstract}
 \itshape
-We prove that every finite union-closed family with a nonempty member has an element that lies in at least $0.38288525996\ldots$ of its members. This number is the exact limit of the entropy method in the form developed by Liu and Jiang, and earlier work had come within a hundred-millionth of it without reaching it. The proof chooses the auxiliary function so that the two inequalities behind the method touch zero at a single point, and shows by a convexity argument that they stay nonnegative around it. With a global coupling of Jiang, the bound is strict for every family. We also prove the conjecture itself for every family of at most fifty-two members, two more than was known, by reducing a smallest counterexample to two families of down-sets of an unknown order and refuting them with a checked satisfiability proof.
+We prove that every finite union-closed family with a nonempty member has an element that lies in at least $0.38288525996\ldots$ of its members. This number is the exact limit of the entropy method in the form developed by Liu and Jiang, and earlier work had come within a hundred-millionth of it without reaching it. The proof chooses the auxiliary function so that the two inequalities behind the method touch zero at a single point, and shows by a convexity argument that they stay nonnegative around it. With a global coupling of Jiang, the bound is strict for every family. We also prove the conjecture itself for every family of at most fifty-four members, four more than was known, by reducing a smallest counterexample to families of down-sets of an unknown order and refuting them with checked satisfiability proofs.
 \par\medskip\upshape\noindent\textit{2020 Mathematics Subject Classification.} 05D05; 94A17; 65G30; 68V15.
 \end{abstract}
 
@@ -104,13 +104,13 @@ p\ \ge\ \Cs+\frac{\ln^2(2N-1)}{128\,N^2\ln^2 N}\ >\ \Cs .
 
 The margin in Theorem~\ref{thm:strict} tends to zero, so it does not raise $c_{\mathrm{UC}}$ above $\Cs$; by the results just quoted, going further needs an argument outside the single-letter framework. Figure~\ref{fig:records} places the certified constants.
 
-The second result of the paper concerns small families. Frankl's conjecture is known for every family with at most $50$ members, which follows from the bound of Roberts and Simpson \cite{RS10} on the size of a smallest counterexample and the verification of the conjecture for ground sets of at most $12$ elements \cite{VZ17,BS15}. We exclude the boundary case of that bound.
+The second result of the paper concerns small families. Frankl's conjecture is known for every family with at most $50$ members, which follows from the bound of Roberts and Simpson \cite{RS10} on the size of a smallest counterexample and the verification of the conjecture for ground sets of at most $12$ elements \cite{VZ17,BS15}. We exclude the boundary case of that bound and the case one step above it.
 
 \begin{mainthm}\label{thm:small}
-Every union-closed family with at most $52$ members that contains a nonempty set has an element lying in at least half of its members.
+Every union-closed family with at most $54$ members that contains a nonempty set has an element lying in at least half of its members.
 \end{mainthm}
 
-The proof (Section~\ref{sec:small}) reduces a hypothetical counterexample with $51$ members on $13$ elements to two families of down-sets of an unknown partial order on $11$ points, with four constraints derived by hand, and shows by a satisfiability computation with a checked proof certificate that no such pair exists. Without the computer, the same reduction proves that such a counterexample, of any size $4m-1$ on $m$ elements, must contain two elements one of which lies in every member containing the other (Proposition~\ref{prop:nodom}).
+The proof (Section~\ref{sec:small}) reduces a hypothetical smallest counterexample, which has $51$ or $53$ members on $13$ elements, to families of down-sets of an unknown partial order on $11$ points, with constraints derived by hand, and shows by satisfiability computations with checked proof certificates that no such families exist. Without the computer, the same reduction proves that such a counterexample, of any size $4m-1$ on $m$ elements, must contain two elements one of which lies in every member containing the other (Proposition~\ref{prop:nodom}).
 
 \begin{figure}[t]
 \centering
@@ -351,7 +351,7 @@ Theorem~\ref{thm:main} closes the gap between what the reduction (K)--(M) can ce
 A useful structural fact holds for every union-closed family: if the next bit of a prefix $\alpha$ is forced to be zero, so is the next bit of every prefix $\alpha'\subseteq\alpha$ that occurs.\footnote{If $\alpha'\subseteq\alpha$ are both prefixes of members and some member extending $\alpha'$ had bit $1$ at the next coordinate, its union with a member extending $\alpha$ would extend $\alpha$ and have bit $1$ there.} So the set of prefixes at which an element is surely absent is a down-set. The adversarial laws behind the ceilings place such prefixes freely. An argument that uses the down-set structure, for instance through a correlation inequality of Harris type across coordinates, is not covered by the ceilings; we do not know whether it gives more.
 
 %----------------------------------------------------------------------
-\section{Families of at most fifty-two members}\label{sec:small}
+\section{Families of at most fifty-four members}\label{sec:small}
 
 In this section a \emph{counterexample} is a finite union-closed family $\cA$ with a nonempty member in which every element lies in fewer than half of the members. Fix a counterexample $\cA$ with the least possible number of members, write $U=\bigcup\cA$ (a member) and $m=|U|$. For $i\in U$ let $A_i$ be the union of the members avoiding $i$, which is the largest member avoiding $i$, and write $|x|$ for the number of members containing $x$. We say that $j$ \emph{dominates} $x$, and write $x\preceq j$, if every member containing $x$ contains $j$; then $x\notin A_j$ exactly when $x\preceq j$, so $D(j)=U\setminus A_j$ is the set of elements dominated by $j$.\footnote{Domination is the order of the join-irreducible elements of the lattice $\cA$ read backwards. It is reflexive and transitive, and on a separating family it is antisymmetric, because two elements dominating each other lie in the same members.}
 
@@ -396,17 +396,39 @@ For $3\le m\le 13$ there is no configuration as in Lemma~\ref{lem:RS}, whatever 
 Encode (a) to (d) in propositional logic, with one variable for each pair $x<j$ of a naturally labelled order on $W=\{0,\dots,m-3\}$ (every partial order has a linear extension, so the labels may be chosen to increase along the order), one for each membership $x\in R$ and $x\in S$, and selector variables for the intersections required by (b) and (c). Transitivity, the down-set property and the selectors are clauses of at most four literals; distinctness is imposed by listing the members of each family in strictly increasing lexicographic order, which loses no generality; (d) is a cardinality constraint written as a sequential counter. For $m=13$ the formula has $8{,}929$ variables and $121{,}290$ clauses. The solver CaDiCaL reports each formula unsatisfiable and writes a DRAT proof, and the independent checker drat-trim verifies every proof.\footnote{The formula is written by \texttt{checks/sat/boundary\_cnf.py} and the solver and checker are run by \texttt{checks/sat/run\_sat.sh} in the archive \cite{BB26z}. For $m=13$ the solver needs about $15$ minutes on one core and its proof has about one gigabyte. Two further checks guard the encoding. Weakening (d) to $r+s\ge m-3$ makes the formula satisfiable for $m=7,8$, and the decoded solutions satisfy (a) to (d) in that weakened form when tested directly, so the clauses do not exclude more than they should. A second encoding, written separately on the python-sat library, gives the same answer for every $m\le13$ (with its own proof for $m=13$, also verified by drat-trim), and for $m=6,7,8$ the result agrees with integer programs solved separately for each nontrivial partial order on $4$, $5$ and $6$ points ($15$, $62$ and $317$ orders up to isomorphism).}
 \end{proof}
 
-\begin{proof}[Proof of Theorem~\ref{thm:small}]
-Suppose a counterexample with at most $52$ members exists, and let $\cA$ be one with the fewest members. By Lemma~\ref{lem:smallest}, $|\cA|=2n+1\le 52$, so $n\le 25$, while $n\ge 2m-1\ge 25$. Hence $m=13$ and $n=2m-1$, which is the boundary case. Lemma~\ref{lem:RS} gives a configuration on $11$ points with $m=13$, and Theorem~\ref{thm:sat} says that none exists.
+\paragraph*{One step above the boundary.} Suppose now $n=2m$, so $|\cA|=4m+1$. The argument for partners still gives equality: a top $t$ again has a partner $p$, another top, such that the members containing both are exactly $U$ and the $A_i$ with $i\in W$, and the blocks now have $m-1$, $m+1$, $m+1$ and $m$ members.\footnote{In the display of Appendix~\ref{app:boundary}, $p$ lies in at least $\lceil (n+1)/2\rceil=m+1$ members of $\cA^t$, so $|p|\ge(m+1)+(m-1)=2m=n$. Hence $|P_{11}|=m-1$, $|P_{10}|=|P_{01}|=2m-(m-1)=m+1$ and $|P_{00}|=(4m+1)-(m-1)-2(m+1)=m$.} Define $\mathcal R$ and $\mathcal S$ as before, and for a member $Z$ of $P_{00}$ put $T_Z=W\setminus Z$; let $\mathcal T$ be the family of these sets and $t(x)$ the number of them containing $x$. With $P_{00}$ in hand the frequency condition can be written exactly.
+
+\begin{lemma}\label{lem:RST}
+If $n=2m$, then, with $\le$ the domination order on $W$ and $D(j)=\{x\in W:x\le j\}$:
+\begin{enumerate}
+\item[(a)] $\mathcal R$ and $\mathcal S$ each consist of $m+1$ distinct down-sets and $\mathcal T$ of $m$ distinct down-sets of $(W,\le)$; each family is closed under intersection, and $R\cap T\in\mathcal R$, $S\cap T\in\mathcal S$ for $R\in\mathcal R$, $S\in\mathcal S$, $T\in\mathcal T$;
+\item[(b)] each of $R\cap S$, $R\cap D(j)$, $S\cap D(j)$, $T\cap D(j)$ and $D(i)\cap D(j)$ is empty or equal to $D(k)$ for some $k\in W$;
+\item[(c)] a point lying in every member of $\mathcal R$, or in every member of $\mathcal S$, lies in every member of $\mathcal T$;
+\item[(d)] $r(x)+s(x)+t(x)+d(x)\ge 2m+1$ for every $x\in W$, where $d(x)=|\{j\in W:x\le j\}|$.
+\end{enumerate}
+\end{lemma}
+
+The proof is in Appendix~\ref{app:boundary}. Unlike Lemma~\ref{lem:RS}, conditions (a) and (b) record the union of any two members of $\cA$, not only of a member of $P_{10}$ and one of $P_{01}$, and (d) counts the members avoiding $x$ exactly.
+
+\begin{theorem}\label{thm:sat53}
+For $4\le m\le 13$ there is no configuration as in Lemma~\ref{lem:RST}, whatever the partial order.
+\end{theorem}
+
+\begin{proof}
+The encoding is that of Theorem~\ref{thm:sat}, with the third family $\mathcal T$, selector variables for the intersections in (a) and (b), one auxiliary variable for each point and family in (c), and the frequency condition (d), in which the term $d(x)$ is a sum of order variables. For $m=13$ the formula has $28{,}676$ variables and $458{,}481$ clauses. CaDiCaL reports each formula unsatisfiable and writes a proof in the LRAT format, which the checker lrat-check reads while it is written and verifies.\footnote{In the archive \cite{BB26z} the formula is written by \texttt{checks/sat/above\_cnf.py}, and the whole run is carried out by \texttt{checks/sat/run\_sat53.sh}; streaming the proof into the checker means that no proof file is stored. On a GitHub-hosted runner the solver and the checker together take about $41$ minutes for $m=13$ and about $19$ minutes for $m=12$. A second run for $m=13$, in which the order is also required to be nontrivial (the trivial order is excluded by the argument of Proposition~\ref{prop:nodom}, which carries over with $m+1$ members in each family), is also refuted and verified. Lowering the bound in (d) by five makes the formula satisfiable for $m=7$, and the decoded solution satisfies every constraint when tested directly; a separate encoding written on the python-sat library, with no labelling of the order and without (c), gives the same answers for $m=5,6$ and for that weakened case.}
 \end{proof}
 
-\begin{remark}\label{rem:fiftythree}
-The next sizes are not reached by the same method. A smallest counterexample with $53$ members has $n=26$ and, by Lemma~\ref{lem:smallest}, $m=13$, so $n=2m$ lies one step above the boundary case and the blocks no longer have the sizes used above. The configuration of Lemma~\ref{lem:RS} for $m=14$ (a counterexample with $55$ members on $14$ elements) is a formula of the same kind, about four times larger; it also needs the theorem for $13$-element ground sets, which is open.
+\begin{proof}[Proof of Theorem~\ref{thm:small}]
+Suppose a counterexample with at most $54$ members exists, and let $\cA$ be one with the fewest members. By Lemma~\ref{lem:smallest}, $|\cA|=2n+1\le 53$, so $n\le 26$, while $n\ge 2m-1\ge 25$. Hence $m=13$ and $n\in\{25,26\}$. If $n=25=2m-1$, Lemma~\ref{lem:RS} gives a configuration on $11$ points that Theorem~\ref{thm:sat} excludes. If $n=26=2m$, Lemma~\ref{lem:RST} gives one that Theorem~\ref{thm:sat53} excludes.
+\end{proof}
+
+\begin{remark}\label{rem:fiftyfive}
+A smallest counterexample with $55$ members has $n=27$ and $m\in\{13,14\}$. For $m=14$ it is the boundary case $n=2m-1$, a formula of the kind of Theorem~\ref{thm:sat} for $m=14$. For $m=13$ it has $n=2m+1$, and the inequality of Hu leaves one unit of slack: the element $p$ lies in at least $2m=n-1$ members, so it need not be a top and the members containing $t$ and $p$ need not be exactly $U$ and the $A_i$.
 \end{remark}
 
 %----------------------------------------------------------------------
 \section*{Data and code availability}
-The interval programs, the Hessian certification, the encoder of Theorem~\ref{thm:sat} with the script that runs CaDiCaL and checks its proofs with drat-trim, independent checks in C, C\texttt{++} and Julia, the Lean~4 check of the rational breakpoints, the figure programs and the \LaTeX{} source are in the repository \codeDOI{} and its Zenodo archive, doi:10.5281/zenodo.23484214 \cite{BB26z}. The literature and status checks and the record of the routes tried beyond $\Cs$ were made with the BLLM engine Anaxia, release v3.0.5 \cite{Ana26}. Deep Bhattacharjee carried out the computations and the Python, C, C\texttt{++}, Julia, Lean and shell verifications with AI assistance (Claude, Anthropic).
+The interval programs, the Hessian certification, the encoders of Theorems~\ref{thm:sat} and~\ref{thm:sat53} with the scripts that run CaDiCaL and check its proofs with drat-trim and lrat-check, independent checks in C, C\texttt{++} and Julia, the Lean~4 check of the rational breakpoints, the figure programs and the \LaTeX{} source are in the repository \codeDOI{} and its Zenodo archive, doi:10.5281/zenodo.23484214 \cite{BB26z}. The literature and status checks and the record of the routes tried beyond $\Cs$ were made with the BLLM engine Anaxia, release v3.0.5 \cite{Ana26}. Deep Bhattacharjee carried out the computations and the Python, C, C\texttt{++}, Julia, Lean and shell verifications with AI assistance (Claude, Anthropic).
 
 \section*{Ethical declarations}
 Funding: none. Competing interests: none.
@@ -593,7 +615,7 @@ p\ \ge\ \Cs+\frac{V}{32\ln^2N}\ \ge\ \Cs+\frac{\ln^2(2N-1)}{128\,N^2\ln^2 N}.
 %----------------------------------------------------------------------
 \section{The boundary configuration}\label{app:boundary}
 
-This appendix proves Lemma~\ref{lem:smallest} (except $m\ge13$), the existence of partners, Lemma~\ref{lem:RS} and Proposition~\ref{prop:nodom}. Throughout, $\cA$ is a counterexample with the fewest members.
+This appendix proves Lemma~\ref{lem:smallest} (except $m\ge13$), the existence of partners, Lemma~\ref{lem:RS}, Proposition~\ref{prop:nodom} and Lemma~\ref{lem:RST}. Throughout, $\cA$ is a counterexample with the fewest members.
 
 \paragraph*{Separation.} If two elements $x,y$ lie in the same members, deleting $y$ from every member gives a union-closed family with the same number of members (two members cannot differ only in $y$) and the same frequencies. So among the counterexamples with the fewest members we may take one on the fewest elements, and it is separating: any two elements are distinguished by a member.
 
@@ -633,6 +655,16 @@ If $\alpha+\beta=w$, then $\delta_R=0$: every $R\neq R_0$ has size $\alpha$, and
 So $\alpha+\beta=w+1$ and $\delta_R+\delta_S\le m-1$. Now a largest $R$ and a largest $S$ meet in exactly one point and together cover $W$. Let $k_R,k_S$ be the numbers of largest members. Each member other than the least and the largest ones adds at least $1$ to $\delta$, so $k_R+k_S\ge 2(m-1)-(\delta_R+\delta_S)\ge m-1\ge3$, and we may assume $k_R\ge2$. If $R_1\ne R_2$ are largest, every largest $S$ contains $(W\setminus R_1)\cup(W\setminus R_2)=W\setminus(R_1\cap R_2)$, which has at least $w-\alpha+1=\beta$ points; so $|R_1\cap R_2|=\alpha-1$ and $S=W\setminus(R_1\cap R_2)$. Thus $k_S=1$, the largest member $O$ of $\mathcal S$ is unique, and every two largest members of $\mathcal R$ meet in $T=W\setminus O$, so they are $T\cup\{x\}$ for distinct points $x\in O$, where $|O|=\beta=w+1-\alpha$. Since $k_S=1$, $\delta_S\ge m-2$, hence $\delta_R\le1$. The set $T=R_1\cap R_2$ belongs to $\mathcal R$ and contains $R_0$.
 
 If $T=R_0$, every $R\neq R_0$ strictly contains $T$ and so has size at least $\alpha$: all $m-1$ of them are largest and give $m-1$ distinct points of $O$, while $|O|=w+1-\alpha\le m-2$. If $T\ne R_0$, then $T$ has size $\alpha-1$ and adds $1$ to $\delta_R$, so $\delta_R=1$ and the other $m-2$ members besides $R_0$ and $T$ are largest; they give $m-2$ distinct points of $O$, while $|O|=w+1-\alpha\le m-3$ because $\alpha\ge|T|+1\ge|R_0|+2\ge2$. Both are impossible. \qed
+
+\paragraph*{Proof of Lemma~\ref{lem:RST}.} Let $n=2m$. In the display of the bound $n\ge2m-1$, the element $p$ lies in at least $\lceil(2m+1)/2\rceil=m+1$ members of $\cA^t$ and in the $m-1$ members $U$ and $A_i$, $i\in W$, so $|p|\ge 2m=n$. Equality holds throughout: $p$ is a top, and the members containing $t$ and $p$ are exactly $U$ and the $A_i$ with $i\in W$. The block sizes follow as in the footnote of Section~\ref{sec:small}, and $D(j)\subseteq W$ for $j\in W$ as in the proof of Lemma~\ref{lem:RS}(a).
+
+(a) For $\mathcal R$ and $\mathcal S$ the argument of Lemma~\ref{lem:RS}(b) applies verbatim. A member $Z$ of $P_{00}$ avoids $t$ and $p$, so it is determined by $T_Z=W\setminus Z$, and $T_Z$ is a down-set because $x\in Z$ and $x\le j$ force $j\in Z$. The union of two members of $P_{00}$ lies in $P_{00}$, and the union of $X\in P_{10}$ and $Z\in P_{00}$ contains $t$ and not $p$, so it lies in $P_{10}$ and $R_{X\cup Z}=R_X\cap T_Z$; the same holds for $P_{01}$.
+
+(b) Each of the unions $X\cup Y$ ($X\in P_{10}$, $Y\in P_{01}$), $X\cup A_j$, $Y\cup A_j$, $Z\cup A_j$ ($Z\in P_{00}$) and $A_i\cup A_j$ contains $t$ and $p$, so it is $U$ or some $A_k$ with $k\in W$, and its complement in $W$ is empty or $D(k)$. These complements are the five intersections listed.
+
+(c) The member $A_p$ contains $t$, so it lies in $P_{10}$, and it contains every member of $P_{10}$; hence the points lying in every member of $\mathcal R$ are those of $W\setminus A_p$, the points $x$ with $x\preceq p$. Such an $x$ lies only in members containing $p$, so in no member of $P_{00}$, and therefore in every $T_Z$. The same argument with $A_t$ applies to $\mathcal S$.
+
+(d) The members avoiding $x\in W$ are the $r(x)$ members of $P_{10}$ with $x\in R_X$, the $s(x)$ of $P_{01}$, the $t(x)$ of $P_{00}$ and the $d(x)$ members $A_j$ of $P_{11}$ with $x\le j$. Since $|x|\le n=2m$, at least $(4m+1)-2m=2m+1$ members avoid $x$. \qed
 
 %----------------------------------------------------------------------
 \begin{thebibliography}{99}\rightskip=0pt plus 3em
