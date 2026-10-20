@@ -16,7 +16,7 @@ work on the union-closed sets conjecture has a paper there: R. Alweiss,
 B. Huang and M. Sellke, *Improved lower bound for Frankl's union-closed sets
 conjecture*, EJC 31(3) (2024), P3.35. The paper proves the constant
 0.38288525996..., the exact limit of the method in the form of Liu and Jiang,
-and the conjecture itself for every family of at most 52 members.
+and the conjecture itself for every family of at most 54 members.
 
 MSC 2020: primary 05D05; secondary 94A17, 65G30, 68V15.
 
