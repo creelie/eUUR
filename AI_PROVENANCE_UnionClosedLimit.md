@@ -5,7 +5,7 @@ and Ushashi Bhattacharya (ORCID 0009-0002-2254-3914).
 
 - Paper: https://github.com/creelie/eUUR/blob/main/preprintUnionClosedLimit/UnionClosedLimit.pdf
 - Repository: https://github.com/creelie/eUUR
-- Archive: release v1.0.0, doi:10.5281/zenodo.23480219; release v1.1.0, doi:10.5281/zenodo.23484214, adds Theorem C (all versions doi:10.5281/zenodo.23480218)
+- Archive: release v1.0.0, doi:10.5281/zenodo.23480219; release v1.1.0, doi:10.5281/zenodo.23484214, adds Theorem C; release v1.2.0, doi:10.5281/zenodo.23645624, extends it to 54 members (all versions doi:10.5281/zenodo.23480218)
 
 ## Result
 

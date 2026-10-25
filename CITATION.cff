@@ -13,8 +13,8 @@ authors:
     orcid: "https://orcid.org/0009-0002-2254-3914"
     affiliation: "Formerly, National Taiwan University, Taipei 106319, Taiwan"
     email: rai.bhattacharya.in@gmail.com
-version: 1.2.0
-doi: "10.5281/zenodo.23484214"
+version: 1.2.1
+doi: "10.5281/zenodo.23645624"
 date-released: 2026-10-20
 license: MIT
 repository-code: "https://github.com/creelie/eUUR"
