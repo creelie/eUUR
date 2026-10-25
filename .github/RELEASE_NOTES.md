@@ -10,7 +10,7 @@ where q* = 0.69090773872540775… is the root in (0, 1) of (1 − q) ln(1 − q)
 
 **Theorem B.** If the family has N ≥ 2 members, it has an element in at least a fraction C* + ln²(2N − 1)/(128 N² ln² N) of them.
 
-**Theorem C.** Every union-closed family with at most 52 members that contains a nonempty set has an element in at least half of its members (known before: at most 50).
+**Theorem C.** Every union-closed family with at most 54 members that contains a nonempty set has an element in at least half of its members (known before: at most 50).
 
 | Step | Content |
 |---|---|
@@ -20,8 +20,9 @@ where q* = 0.69090773872540775… is the root in (0, 1) of (1 − q) ln(1 − q)
 | Section 5, Appendix D | the rest of the unit square: analytic strips and edges, and an interval covering (bridge 39 boxes, kernel 1572, mixture 8193) |
 | Appendix F | the strict bound from Jiang's global coupling |
 | Section 8, Appendix G | Theorem C: a smallest counterexample with 51 members on 13 elements gives two families of down-sets on 11 points (Lemma VIII.2, by hand); with no domination they are impossible for every m (Proposition VIII.3, by hand); with any order they are refuted by CaDiCaL for m = 3, …, 13, every DRAT proof checked by drat-trim (Theorem VIII.4) |
+| Section 8, Appendix G | one step above: a smallest counterexample with 53 members (n = 2m, m = 13) gives three families of down-sets on 11 points (Lemma VIII.5, by hand); the trivial order is excluded by hand, and any order is refuted by CaDiCaL for m = 4, …, 13, every LRAT proof checked by lrat-check while it is written (Theorem VIII.6) |
 
-Checks: `checks/python/tangency.py` (Hessian certificate on S) and `checks/python/verify_exact.py` (interval certificate on the rest, adapted from the program of Jiang's Appendix B) are the proof; C, C++ and Julia programs cross-check q*, C*, the Hessians and the sign of the two gaps on fine grids; Lean 4 checks the rational breakpoints with no axioms. `checks/sat/run_sat.sh` repeats the computer part of Theorem C.
+Checks: `checks/python/tangency.py` (Hessian certificate on S) and `checks/python/verify_exact.py` (interval certificate on the rest, adapted from the program of Jiang's Appendix B) are the proof; C, C++ and Julia programs cross-check q*, C*, the Hessians and the sign of the two gaps on fine grids; Lean 4 checks the rational breakpoints with no axioms. `checks/sat/run_sat.sh` and `checks/sat/run_sat53.sh` repeat the computer part of Theorem C.
 
 Files:
 - `UnionClosedLimit_final2.pdf`: the paper
