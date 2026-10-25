@@ -19,12 +19,14 @@ coupling, a strictly larger bound depending on the number of members. The best
 constants proved before were 0.38288525 (Jiang) and 0.3828852549667978 (Costa
 and Sadhu).
 
-The paper also proves the conjecture itself for every family of at most 52
-members (known before: 50). A smallest counterexample would have 51 members on
-13 elements; Appendix G reduces it by hand to two families of down-sets of an
-unknown order on 11 points, and the satisfiability solver CaDiCaL refutes that
-configuration, with every DRAT proof checked by drat-trim
-(checks/sat/run_sat.sh). The reduction, the encoding, the hand proofs and the
+The paper also proves the conjecture itself for every family of at most 54
+members (known before: 50). A smallest counterexample with at most 54 members
+would have 51 or 53 members on 13 elements; Appendix G reduces each case by
+hand to families of down-sets of an unknown order on 11 points, and the
+satisfiability solver CaDiCaL refutes both configurations, with every DRAT
+proof checked by drat-trim (checks/sat/run_sat.sh) and every LRAT proof checked
+by lrat-check while it is written (checks/sat/run_sat53.sh, run on GitHub
+Actions by .github/workflows/sat53.yml). The reduction, the encoding, the hand proofs and the
 checks were made with AI assistance (Claude, Anthropic) in Claude Code.
 
 ## Who did what
